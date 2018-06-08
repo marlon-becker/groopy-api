@@ -7,6 +7,7 @@ module.exports = (mongoose) => {
      name: { type: String, required: true },
      role: { type: String, required: true, default: 'subscriber' }, //Super admin | admin | editor | author | contributor
      status: { type: String, default: 'active' }, //Super admin | admin | editor | author | contributor
+     avatar: { type: String },
      created_at: { type: Date, default: Date.now() },
   });
 
@@ -18,7 +19,8 @@ module.exports = (mongoose) => {
     return await this.create({
       email: data.email,
       password: data.password,
-      name: data.name
+      name: data.name,
+      avatar: data.avatar,
     });
   }
 

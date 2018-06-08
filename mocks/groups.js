@@ -8,11 +8,11 @@ const groups = [
       'joffrey@lanister.com',
       'jaime@lanister.com',
       'cersei@lanister.com',
-      'tyrion@lanister.com'
+      'tyrion@lanister.com',
     ]
   },
   {
-    name: 'The North',
+    name: 'Stark Family',
     description: 'King in the North!',
     admins: ['ned@winterfell.com'],
     type: 'birthday',
@@ -22,7 +22,33 @@ const groups = [
       'sansa@winterfell.com',
       'arya@winterfell.com',
       'robb@winterfell.com',
-      'theon@reek.com',
+    ]
+  },
+  {
+    name: 'Little trip to the Wall',
+    description: 'Wouldn\'t it be nice to visit the wall?',
+    admins: ['ned@winterfell.com'],
+    type: 'trip',
+    users: [
+      'samwell@nightwatch.com',
+      'jon@bastards.com',
+    ]
+  },
+  {
+    name: 'Lanisters vs Starks',
+    description: 'what about a football game?',
+    admins: ['ned@winterfell.com'],
+    type: 'game',
+    users: [
+      'joffrey@lanister.com',
+      'jaime@lanister.com',
+      'cersei@lanister.com',
+      'tyrion@lanister.com',
+      'catelyn@winterfell.com',
+      'jon@bastards.com',
+      'sansa@winterfell.com',
+      'arya@winterfell.com',
+      'robb@winterfell.com',
     ]
   },
   {

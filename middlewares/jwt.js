@@ -21,7 +21,7 @@ module.exports = async (ctx, next) => {
 
   if (ctx.signInUser) {
     const token = jwt.sign({
-      exp: Math.floor(Date.now() / 1000) + (60*60),
+      exp: Math.floor(Date.now() / 1000) + (config.JWT_AUTH_LIFETIME),
       data: {
         email: ctx.signInUser.email
       }

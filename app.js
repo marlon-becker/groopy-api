@@ -37,8 +37,22 @@ app
 
 var server = http.createServer(app.callback());
 const io = socketIo(server);
-io.on('connection', function(client){ });
 
-server.listen(config.PORT, function () {
-  console.log('Groopy API server up and running!');
+const chatController          = require('./controllers/chat.controller');
+
+io.on('connection', function (client) {
+
+  client.on('join', chatController.handleJoin);
+  client.on('leave', chatController.handleLeave);
+  client.on('message', chatController.handleMessage);
+  client.on('availableUsers', chatController.handleGetAvailableUsers);
+  client.on('disconnect',chatController.handleDisconnect);
+  client.on('error', function (err) {
+    console.log('received error from client:', client.id)
+    console.log(err)
+  })
+
+  console.log('connected!');
 });
+
+server.listen(config.PORT);

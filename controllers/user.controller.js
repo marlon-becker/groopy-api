@@ -6,7 +6,7 @@ const env         = process.env.NODE_ENV || 'development';
 const config      = require('../config')[env];
 const upload      = require('../services/upload');
 
-const getAll = async ctx => {
+const getAll = async (ctx) => {
   ctx.body = await models.User.findAll()
 };
 
@@ -17,7 +17,7 @@ const create = async (ctx) => {
     email: ctx.request.body.email,
     password: await bcrypt.hash(ctx.request.body.password, 10),
     name: ctx.request.body.name,
-    avatar: avatarUrl
+    avatar: avatarUrl,
   }
 
   const user = await models.User.createUser(userData);
@@ -73,7 +73,6 @@ const addConnection = async (ctx) => {
 
 const getConnections = async (ctx) => {
   const connections = await models.User2User.find({ user: ctx.user });
-
   const users = await models.User.find({
     '_id': {
       $in: connections.reduce((acc, el) => {
@@ -85,6 +84,11 @@ const getConnections = async (ctx) => {
   ctx.body = users;
 }
 
+const me = async (ctx) => {
+  const user = await models.User.findOne({ email: ctx.user.email });
+  ctx.body = user;
+}
+
 module.exports = {
   getAll,
   create,
@@ -92,4 +96,5 @@ module.exports = {
   getActiveGroups,
   addConnection,
   getConnections,
+  me,
 };

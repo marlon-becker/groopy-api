@@ -6,6 +6,7 @@ module.exports = (mongoose) => {
      description: { type: String, required: true },
      type: { type: String, required: true },
      status: { type: String, required: true, default: 'new' },
+     avatar: { type: String },
      created_at: { type: Date, default: Date.now() },
   });
 
@@ -24,7 +25,8 @@ module.exports = (mongoose) => {
     return await this.create({
       name: data.name,
       description: data.description,
-      type: data.type
+      type: data.type,
+      avatar: data.avatar,
     });
   }
 
