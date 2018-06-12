@@ -37,6 +37,7 @@
     "mongoose": "^5.1.4",
     "mongoose-type-email": "^1.0.9",
     "socket.io": "^2.1.1",
+    "socketio-jwt-auth": "0.0.6",
     "util": "^0.10.4",
     "uuid": "^3.2.1"
   },

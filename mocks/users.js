@@ -29,7 +29,6 @@
 'ramsay@bastards.com'
 'petyr@notsolittle.com'
 'varys@spiders.com'
-
 */
 
 const users = [
@@ -49,9 +48,7 @@ const users = [
   {name: 'Tyrion Lannister', password: 'test', avatar: 'tyrion.jpg', email: 'tyrion@lanister.com' },
   {name: 'Tywin Lannister', password: 'test', avatar: 'tywin.jpg', email: 'tywin@lanister.com' },
   {name: 'Bronn', password: 'test', avatar: 'bronn.jpg', email: 'bronn@mercenaries.com' },
-  {name: 'Brienne of Tarth', password: 'test', avatar: 'brienne.jpg', email: 'brienne@tarth.com' },
   {name: 'Sandor "The Hound" Clegane', password: 'test', avatar: 'sandor.jpg', email: 'thehound@brotherslove.com' },
-  {name: 'The High Sparrow', password: 'test', avatar: 'high.jpg', email: 'high@sparrow.com' },
   {name: 'Daenerys Targaryen', password: 'test', avatar: 'daenerys.jpg', email: 'daenerys@dragonsarecool.com' },
   {name: 'Viserys Targaryen', password: 'test', avatar: 'viserys.jpg', email: 'viserys@goldenhelmet.com' },
   {name: 'Khal Drogo', password: 'test', avatar: 'khal.jpg', email: 'khal@dothraki.com' },

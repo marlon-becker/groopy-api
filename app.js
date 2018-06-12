@@ -2,14 +2,15 @@
 
 require('dotenv').config();
 
-const Koa         = require('koa');
-const cors        = require('koa-cors');
-const http        = require('http');
-const convert     = require('koa-convert');
-const socketIo    = require('socket.io');
-const compress    = require('koa-compress');
-const bodyParser  = require('koa-bodyparser');
-const formidable  = require('koa2-formidable');
+const Koa          = require('koa');
+const cors         = require('koa-cors');
+const http         = require('http');
+const convert      = require('koa-convert');
+const socketIo     = require('socket.io');
+const compress     = require('koa-compress');
+const bodyParser   = require('koa-bodyparser');
+const formidable   = require('koa2-formidable');
+const socketIoAuth = require('socketio-jwt-auth');
 
 const jwt          = require('./middlewares/jwt');
 const errorHandler = require('./middlewares/error-handler');
@@ -40,18 +41,34 @@ const io = socketIo(server);
 
 const chatController          = require('./controllers/chat.controller');
 
+// using middleware
+io.use(socketIoAuth.authenticate({
+  secret: config.JWT_SECRET,    // required, used to verify the token's signature
+}, function(payload, done) {
+  if (payload && payload.data.email) {
+  db.User.findOne({email: payload.data.email}, function(err, user) {
+      if (err) { return done(err);}
+      if (!user) { return done(null, false, 'User does not exist'); }
+      return done(null, user);
+    });
+  } else {
+    return done(); // in your connection handler user.logged_in will be false
+  }
+}));
 io.on('connection', function (client) {
 
+  client.on('connectUser', chatController.handleConnect);
   client.on('join', chatController.handleJoin);
   client.on('leave', chatController.handleLeave);
-  client.on('message', chatController.handleMessage);
+  client.on('addToGroupTimeline', chatController.handleAddToGroupTimeline);
+  client.on('getCurrentGroupMessages', chatController.getCurrentGroupMessages);
+  client.on('getCurrentGroupUsers', chatController.getCurrentGroupUsers);
   client.on('availableUsers', chatController.handleGetAvailableUsers);
-  client.on('disconnect',chatController.handleDisconnect);
+  client.on('disconnect', chatController.handleDisconnect);
   client.on('error', function (err) {
     console.log('received error from client:', client.id)
     console.log(err)
   })
-
   console.log('connected!');
 });
 

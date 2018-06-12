@@ -24,6 +24,7 @@ function sleep(ms) {
   //Create new USERS
   await users.forEach(async (user) => {
     const data = {
+      avatarUrl: 'https://s3.eu-west-3.amazonaws.com/groopy/'+user.avatar,
       request: {
         body: {
           email: user.email,
@@ -38,17 +39,13 @@ function sleep(ms) {
 
   await sleep(1000);
 
-  const allUser = await models.User.find();
-  const ned = await models.User.findOne({ email: 'ned@winterfell.com' });
-  console.log(ned);
-  console.log(allUser);
-
   //Create new GROUPS
   await groups.forEach(async (group) => {
     const admin = await models.User.findOne({ email: group.admins[0] });
 
     const data = {
       user: admin,
+      avatarUrl: 'https://s3.eu-west-3.amazonaws.com/groopy/'+group.avatar,
       request: {
         body: {
           name: group.name,
@@ -68,7 +65,6 @@ function sleep(ms) {
   });
 
   await sleep(1000);
-console.log(connections);
   //Create new CONNECTIONS
   for(let prop in connections) {
     await connections[prop].forEach(async (user) => {

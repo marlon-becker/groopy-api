@@ -13,6 +13,7 @@ const groups = [
   },
   {
     name: 'Stark Family',
+    avatar: 'starks.jpg',
     description: 'King in the North!',
     admins: ['ned@winterfell.com'],
     type: 'birthday',
@@ -26,6 +27,7 @@ const groups = [
   },
   {
     name: 'Little trip to the Wall',
+    avatar: 'the_wall.jpg',
     description: 'Wouldn\'t it be nice to visit the wall?',
     admins: ['ned@winterfell.com'],
     type: 'trip',
@@ -36,6 +38,7 @@ const groups = [
   },
   {
     name: 'Lanisters vs Starks',
+    avatar: 'kings_landing.jpg',
     description: 'what about a football game?',
     admins: ['ned@winterfell.com'],
     type: 'game',

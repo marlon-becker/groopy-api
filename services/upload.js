@@ -24,7 +24,9 @@ module.exports = async (file) => {
   var params = {
     Bucket: S3_BUCKET,
     Key: fileName,
-    Body: imageData
+    Body: imageData,
+    ContentType: 'image/jpeg',
+    ACL: 'public-read'
   };
   var options = {
     partSize: 10 * 1024 * 1024,

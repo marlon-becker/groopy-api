@@ -12,7 +12,7 @@ const getAll = async (ctx) => {
 
 const create = async (ctx) => {
   const { files } = ctx.request;
-  const avatarUrl = files ? await upload(files.avatar) : config.DEFAULT_AVATAR;
+  const avatarUrl = files && Object.keys(files) > 0 ? await upload(files.avatar) : (ctx.avatarUrl ? ctx.avatarUrl : config.DEFAULT_AVATAR);
   const userData = {
     email: ctx.request.body.email,
     password: await bcrypt.hash(ctx.request.body.password, 10),
