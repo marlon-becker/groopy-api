@@ -1,13 +1,13 @@
 'use strict';
 
-module.exports = (mongoose) => {
+module.exports = mongoose => {
   var GroupSchema = mongoose.Schema({
-     name:  { type: String, required: true },
-     description: { type: String, required: true },
-     type: { type: String, required: true },
-     status: { type: String, required: true, default: 'new' },
-     avatar: { type: String },
-     created_at: { type: Date, default: Date.now() },
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    type: { type: String, required: true },
+    status: { type: String, required: true, default: 'new' },
+    avatar: { type: String },
+    created_at: { type: Date, default: Date.now() }
   });
 
   //File cycle of a group
@@ -17,26 +17,31 @@ module.exports = (mongoose) => {
   // POSTEVENT
   // CLOSED
 
-  GroupSchema.statics.findAll = async function () {
+  GroupSchema.statics.findAll = async function() {
     return await this.find({}).select('name, description');
-  }
+  };
 
-  GroupSchema.statics.createGroup = async function (data) {
+  GroupSchema.statics.createGroup = async function(data) {
     return await this.create({
       name: data.name,
       description: data.description,
       type: data.type,
-      avatar: data.avatar,
+      avatar: data.avatar
     });
-  }
+  };
 
-  GroupSchema.statics.removeGroup = async function (data) {
+  GroupSchema.statics.removeGroup = async function(data) {
     return await this.deleteOne({
       _id: data.id
     });
-  }
+  };
+
+  GroupSchema.statics.findOneById = async function(id) {
+    return await this.findOne({ _id: id });
+  };
 
   let Group = mongoose.model('Group', GroupSchema);
-  for(let method in GroupSchema.statics) GroupSchema.statics[method].bind(Group);
+  for (let method in GroupSchema.statics)
+    GroupSchema.statics[method].bind(Group);
   return Group;
 };

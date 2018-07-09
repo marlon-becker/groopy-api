@@ -1,11 +1,11 @@
 'use strict';
 
-const fs        = require('fs');
-const path      = require('path');
-const basename  = path.basename(__filename);
-const env       = process.env.NODE_ENV || 'development';
-const config    = require('../config')[env];
-const models    = {};
+const fs = require('fs');
+const path = require('path');
+const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config')[env];
+const models = {};
 
 const mongoose = require('mongoose');
 require('mongoose-type-email');
@@ -24,12 +24,14 @@ db.once('open', () => {
 //Gets a list of models from models folder an makes them accessible exporting them
 fs.readdirSync(__dirname)
   .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+    return (
+      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
+    );
   })
   .forEach(file => {
     var model = require(path.join(__dirname, file));
-    model.stat
-    models[file.replace('.js','')] = model(mongoose);
+    model.stat;
+    models[file.replace('.js', '')] = model(mongoose);
   });
 
 module.exports = models;
