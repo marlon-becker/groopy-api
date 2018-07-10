@@ -1,6 +1,5 @@
 const models = require('../models');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config')[env];
+
 const roles = require('../config/roles');
 const upload = require('../services/upload.service');
 
@@ -15,7 +14,7 @@ const create = async ctx => {
       ? await upload(files.avatar)
       : ctx.avatarUrl
         ? ctx.avatarUrl
-        : config.DEFAULT_AVATAR;
+        : process.env.DEFAULT_AVATAR;
   avatarUrl = ctx.request.body.image ? ctx.request.body.image : avatarUrl;
 
   const groupData = {

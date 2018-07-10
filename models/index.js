@@ -3,14 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config')[env];
+
 const models = {};
 
 const mongoose = require('mongoose');
 require('mongoose-type-email');
 
-mongoose.connect(`mongodb://${config.DB_HOST}/${config.DB_NAME}`);
+mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`);
 
 const db = mongoose.connection;
 
