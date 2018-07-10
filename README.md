@@ -1,6 +1,7 @@
 # Groopy API
 
 > Backend application for Groopy app
+
 > [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 For the frontend repository refer to:
@@ -63,7 +64,7 @@ DEFAULT_AVATAR=<default-avatar-img>
 Start the server for development:
 
 ```bash
-cd eventing
+cd groopy-api
 npm run dev
 ```
 
