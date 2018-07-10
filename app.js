@@ -15,11 +15,8 @@ const socketIoAuth = require('socketio-jwt-auth');
 const jwt = require('./middlewares/jwt');
 const errorHandler = require('./middlewares/error-handler');
 
-const env = process.env.NODE_ENV || 'development';
-
 const db = require('./models');
 const router = require('./routers');
-const config = require('./config')[env];
 
 const app = new Koa();
 
@@ -49,7 +46,7 @@ const pollController = require('./controllers/poll.plugin.controller');
 io.use(
   socketIoAuth.authenticate(
     {
-      secret: config.JWT_SECRET // required, used to verify the token's signature
+      secret: process.env.JWT_SECRET // required, used to verify the token's signature
     },
     function (payload, done) {
       if (payload && payload.data.email) {
@@ -87,4 +84,4 @@ io.on('connection', function (client) {
   console.log('connected!');
 });
 
-server.listen(config.PORT);
+server.listen(process.env.PORT);

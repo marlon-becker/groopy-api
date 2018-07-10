@@ -5,16 +5,14 @@ const readFilePromise = require('fs-readfile-promise');
 const util = require('util');
 const fs = require('fs');
 const uuidv4 = require('uuid/v4');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config')[env];
 
 const s3 = new aws.S3({
   version: 'latest',
   region: 'eu-west-3',
-  accessKeyId: config.AWS_ACCESS_KEY,
-  secretAccessKey: config.AWS_SECRET_ACCESS_KEY
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
-const S3_BUCKET = config.S3_BUCKET;
+const S3_BUCKET = process.env.S3_BUCKET;
 
 module.exports = async file => {
   const imageData = await readFilePromise(file.path);
@@ -37,5 +35,5 @@ module.exports = async file => {
     .upload(params, options)
     .promise()
     .catch(e => console.log('ERROR', e));
-  return config.S3_PUBLIC_URL + fileName;
+  return process.env.S3_PUBLIC_URL + fileName;
 };

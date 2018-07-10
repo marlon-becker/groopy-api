@@ -2,8 +2,7 @@ const atob = require('atob');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const models = require('../models');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config')[env];
+
 const upload = require('../services/upload.service');
 
 const getAll = async ctx => {
