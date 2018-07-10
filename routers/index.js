@@ -3,9 +3,8 @@ const jwt = require('koa-jwt');
 const fs = require('fs');
 const path = require('path');
 
-const env = process.env.NODE_ENV || 'development';
 const basename = path.basename(__filename);
-const config = require('../config')[env];
+
 const authorizationMiddleware = require('../middlewares/authorization');
 
 const router = new Router();
@@ -39,7 +38,7 @@ publicRoutes.forEach(routeData => {
 });
 
 //Add JWT auth excluding public urls
-router.use(jwt({ secret: config.JWT_SECRET }));
+router.use(jwt({ secret: process.env.JWT_SECRET }));
 
 //Add all PRIVATE routes
 privateRoutes.forEach(routeData => {

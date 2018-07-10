@@ -61,9 +61,6 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-changelog"
-    },
-    "ghooks": {
-      "pre-commit": "gulp lint"
     }
   }
 }
